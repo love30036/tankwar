@@ -14,8 +14,11 @@ public class GameClinet extends JComponent {
         this.setPreferredSize(new Dimension(screenwidth,screenhight));
     }
 
-
-
+    @Override
+    protected void paintComponent(Graphics g) {
+        g.drawImage(new ImageIcon("assets\\images\\itankD.png").getImage(),
+                400,100,null);
+    }
 
     GameClinet(){
         this(800,600);
