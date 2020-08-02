@@ -122,10 +122,10 @@ public class Tank {
         else if (dirs[0] && dirs[3]&& !dirs[2] &&!dirs[1]) diretion = Diretion.UP_RIGFT;
         else if (dirs[1] && dirs[2]&& !dirs[0] &&!dirs[3]) diretion = Diretion.DOWN_LEFT;
         else if (dirs[1] && dirs[3]&& !dirs[0] &&!dirs[2]) diretion = Diretion.DOWN_RIGHT;
-        else if (dirs[0] && dirs[3]&& !dirs[1] &&!dirs[2]) diretion = Diretion.UP;
-        else if (dirs[1] && dirs[3]&& !dirs[0] &&!dirs[2]) diretion = Diretion.DOWN;
-        else if (dirs[2] && dirs[3]&& !dirs[0] &&!dirs[1]) diretion = Diretion.LEFT;
-        else if (dirs[3] && dirs[1]&& !dirs[0] &&!dirs[2]) diretion = Diretion.RIGHT;
+        else if (dirs[0] && !dirs[3]&& !dirs[1] &&!dirs[2]) diretion = Diretion.UP;
+        else if (dirs[1] && !dirs[3]&& !dirs[0] &&!dirs[2]) diretion = Diretion.DOWN;
+        else if (dirs[2] && !dirs[3]&& !dirs[0] &&!dirs[1]) diretion = Diretion.LEFT;
+        else if (dirs[3] && !dirs[1]&& !dirs[0] &&!dirs[2]) diretion = Diretion.RIGHT;
     }
     public void draw(Graphics g){
 

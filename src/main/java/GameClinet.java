@@ -74,7 +74,7 @@ public class GameClinet extends JComponent {
                 break;
 
         }
-        playerTank.move();
+
     }
     public void keyReleased(KeyEvent e){
         boolean[] dirs = playerTank.getDirs();
