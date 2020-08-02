@@ -24,7 +24,7 @@ public class Tankwar {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                super.keyReleased(e);
+                gameClinet.keyReleased(e);
             }
         });
 
