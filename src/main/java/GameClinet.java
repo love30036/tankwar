@@ -1,12 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
+
 
 public class GameClinet extends JComponent {
 
     private int screenwidth;
     private int screenhight;
     private Tank playerTank;
+    private List<Tank> enemyTank = new ArrayList<>();
+    private List<Wall> walls = new ArrayList<>();
     private boolean stop;
 
     public GameClinet(int screenwidth, int screenhight) {
@@ -28,8 +33,19 @@ public class GameClinet extends JComponent {
 
     }
     public void init(){
-        playerTank = new Tank(getCenterPosX(47),getCenterPosY(47),
+        playerTank = new Tank(getCenterPosX(47),100,
                 Diretion.DOWN_RIGHT);
+        for(int i =0; i<3 ;i++){
+            for (int j = 0; j<4 ;j++){
+                enemyTank.add(new Tank(300+j*80,500+i*80,Diretion.UP,true));
+            }
+        walls.add(new Wall(250,150,15,true));
+        walls.add(new Wall(150,200,15,false));
+        walls.add(new Wall(800,200,15,false));
+
+
+
+        }
     }
 
     @Override
@@ -37,6 +53,12 @@ public class GameClinet extends JComponent {
 //        g.drawImage(playerTank.getimage(),
 //                playerTank.getX(),playerTank.getY(),null);
         playerTank.draw(g);
+        for(Tank tank:enemyTank){
+            tank.draw(g);
+        }
+        for(Wall wall:walls){
+            wall.draw(g);
+        }
 
     }
     private int getCenterPosX(int width){
