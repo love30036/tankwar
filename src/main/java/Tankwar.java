@@ -4,9 +4,11 @@ import java.awt.event.KeyEvent;
 
 public class Tankwar {
 
+    public static GameClinet gameClinet;
+
     public static void main(String[] args) {
         JFrame jFrame = new JFrame();
-        GameClinet gameClinet = new GameClinet(1024,768);
+        gameClinet = new GameClinet(1024,768);
         jFrame.add(gameClinet);
         jFrame.setTitle("tankwar");
         jFrame.setVisible(true);

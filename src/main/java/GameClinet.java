@@ -59,9 +59,14 @@ public class GameClinet extends JComponent {
 
         }
     }
+    public List<GameObject> getGameObject(){
+        return gameObjects;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,getWidth(),getHeight());
 //        g.drawImage(playerTank.getimage(),
 //                playerTank.getX(),playerTank.getY(),null);
         playerTank.draw(g);
@@ -132,10 +137,6 @@ public class GameClinet extends JComponent {
 
 
         }
-
-
-
-
 
     }
 
