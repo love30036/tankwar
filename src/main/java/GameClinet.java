@@ -10,8 +10,9 @@ public class GameClinet extends JComponent {
     private int screenwidth;
     private int screenhight;
     private Tank playerTank;
-    private List<Tank> enemyTank = new ArrayList<>();
-    private List<Wall> walls = new ArrayList<>();
+//    private List<Tank> enemyTank = new ArrayList<>();
+//    private List<Wall> walls = new ArrayList<>();
+    private List<GameObject> gameObjects =new ArrayList<>();
     private boolean stop;
 
     public GameClinet(int screenwidth, int screenhight) {
@@ -33,16 +34,26 @@ public class GameClinet extends JComponent {
 
     }
     public void init(){
-        playerTank = new Tank(getCenterPosX(47),100,
-                Diretion.DOWN_RIGHT);
+        Image[] brickImage = {Tools.getImage("brick.png")};
+        Image[] iTankImage = new Image[8];
+        Image[] eTankImage = new Image[8];
+
+        String[] sub = {"U.png","D.png","L.png","R.png","LU.png","RU.png","LD.png","RD.png"};
+
+        for(int i = 0; i<iTankImage.length;i++){
+            iTankImage[i]=Tools.getImage("iTank"+sub[i]);
+            eTankImage[i]=Tools.getImage("eTank"+sub[i]);
+        }
+
+        playerTank = new Tank(getCenterPosX(47),100,Diretion.UP ,iTankImage);
         for(int i =0; i<3 ;i++){
             for (int j = 0; j<4 ;j++){
-                enemyTank.add(new Tank(300+j*80,500+i*80,Diretion.UP,true));
+                gameObjects.add(new Tank(300+j*80,500+i*80,Diretion.UP,true,eTankImage));
             }
         Image image = Tools.getImage("brick.png");
-        walls.add(new Wall(250,150,15,true,image));
-        walls.add(new Wall(150,200,15,false,image));
-        walls.add(new Wall(800,200,15,false,image));
+        gameObjects.add(new Wall(250,150,15,true,brickImage));
+        gameObjects.add(new Wall(150,200,15,false,brickImage));
+        gameObjects.add(new Wall(800,200,15,false,brickImage));
 
 
 
@@ -54,12 +65,15 @@ public class GameClinet extends JComponent {
 //        g.drawImage(playerTank.getimage(),
 //                playerTank.getX(),playerTank.getY(),null);
         playerTank.draw(g);
-        for(Tank tank:enemyTank){
-            tank.draw(g);
+        for(GameObject object:gameObjects){
+            object.draw(g);
         }
-        for(Wall wall:walls){
-            wall.draw(g);
-        }
+//        for(Tank tank:enemyTank){
+//            tank.draw(g);
+//        }
+//        for(Wall wall:walls){
+//            wall.draw(g);
+//        }
 
     }
     private int getCenterPosX(int width){

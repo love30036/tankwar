@@ -1,21 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Tank {
-    private int x;
-    private int y;
+public class Tank extends GameObject{
+
     Diretion diretion;
     private int speed;
     private boolean dirs[] = new boolean[4];
     private boolean enemy;
 
 
-    public Tank(int x, int y, Diretion diretion) {
-        this(x,y,diretion,false);
+    public Tank(int x, int y, Diretion diretion,Image[] image) {
+
+        this(x,y,diretion,false,image);
     }
-    public Tank(int x, int y, Diretion diretion,boolean enemy) {
-        this.x = x;
-        this.y = y;
+    public Tank(int x, int y, Diretion diretion,boolean enemy, Image[] image) {
+        super(x, y, image);
         this.diretion = diretion;
         this.speed = 5;
         this.enemy=enemy;
@@ -61,36 +60,36 @@ public class Tank {
         this.diretion = diretion;
     }
 
-    public Image getimage(){
-
-        String name = enemy ? "etank":"itank";
-
-        if(diretion==Diretion.UP){
-            return new ImageIcon("assets\\images\\"+name+"U.png").getImage();
-        }
-        if(diretion==Diretion.DOWN){
-            return new ImageIcon("assets\\images\\"+name+"D.png").getImage();
-        }
-        if(diretion==Diretion.LEFT){
-            return new ImageIcon("assets\\images\\"+name+"L.png").getImage();
-        }
-        if(diretion==Diretion.RIGHT){
-            return new ImageIcon("assets\\images\\"+name+"R.png").getImage();
-        }
-        if(diretion==Diretion.UP_LEFT){
-            return new ImageIcon("assets\\images\\"+name+"LU.png").getImage();
-        }
-        if(diretion==Diretion.UP_RIGFT){
-            return new ImageIcon("assets\\images\\"+name+"RU.png").getImage();
-        }
-        if(diretion==Diretion.DOWN_LEFT){
-            return new ImageIcon("assets\\images\\"+name+"LD.png").getImage();
-        }
-        if(diretion==Diretion.DOWN_RIGHT){
-            return new ImageIcon("assets\\images\\"+name+"RD.png").getImage();
-        }
-        return null;
-    }
+//    public Image getimage(){
+//
+//        String name = enemy ? "etank":"itank";
+//
+//        if(diretion==Diretion.UP){
+//            return new ImageIcon("assets\\images\\"+name+"U.png").getImage();
+//        }
+//        if(diretion==Diretion.DOWN){
+//            return new ImageIcon("assets\\images\\"+name+"D.png").getImage();
+//        }
+//        if(diretion==Diretion.LEFT){
+//            return new ImageIcon("assets\\images\\"+name+"L.png").getImage();
+//        }
+//        if(diretion==Diretion.RIGHT){
+//            return new ImageIcon("assets\\images\\"+name+"R.png").getImage();
+//        }
+//        if(diretion==Diretion.UP_LEFT){
+//            return new ImageIcon("assets\\images\\"+name+"LU.png").getImage();
+//        }
+//        if(diretion==Diretion.UP_RIGFT){
+//            return new ImageIcon("assets\\images\\"+name+"RU.png").getImage();
+//        }
+//        if(diretion==Diretion.DOWN_LEFT){
+//            return new ImageIcon("assets\\images\\"+name+"LD.png").getImage();
+//        }
+//        if(diretion==Diretion.DOWN_RIGHT){
+//            return new ImageIcon("assets\\images\\"+name+"RD.png").getImage();
+//        }
+//        return null;
+//    }
     public void move(){
         switch (diretion){
             case UP:
@@ -142,7 +141,7 @@ public class Tank {
             determineDirection();
             move();
         }
-        g.drawImage(getimage(),x,y,null);
+        g.drawImage(image[diretion.ordinal()],x,y,null);
 
 
     }
