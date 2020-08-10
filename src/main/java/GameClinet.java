@@ -14,6 +14,8 @@ public class GameClinet extends JComponent {
 //    private List<Wall> walls = new ArrayList<>();
     private List<GameObject> gameObjects =new ArrayList<>();
     private boolean stop;
+    public static Image[] bullentImage = new Image[8];
+
 
     public GameClinet(int screenwidth, int screenhight) {
         this.screenwidth = screenwidth;
@@ -114,6 +116,10 @@ public class GameClinet extends JComponent {
 //                playerTank.setDiretion(Diretion.RIGHT);
 //                playerTank.setX(playerTank.getX()+playerTank.getSpeed());
                 break;
+            case KeyEvent.VK_CONTROL:
+                playerTank.fire();
+
+                break;
 
         }
 
@@ -139,7 +145,9 @@ public class GameClinet extends JComponent {
         }
 
     }
-
+    public void addGameObject(GameObject object){
+        gameObjects.add(object);
+    }
 
     GameClinet(){
         this(800,600);

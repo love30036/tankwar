@@ -4,9 +4,9 @@ import java.awt.*;
 public class Tank extends GameObject{
 
     Diretion diretion;
-    private int speed;
+    protected int speed;
     private boolean dirs[] = new boolean[4];
-    private boolean enemy;
+    protected boolean enemy;
 
 
     public Tank(int x, int y, Diretion diretion,Image[] image) {
@@ -188,6 +188,10 @@ public class Tank extends GameObject{
             }
         }
         return true;
+    }
+    public void fire(){
+        Tankwar.gameClinet.addGameObject(new Bullet(x+width/2 - GameClinet.bullentImage[0].getWidth(null)/2,
+                y+height/2 - GameClinet.bullentImage[0].getHeight(null)/2,diretion,enemy,GameClinet.bullentImage));
     }
 
 }

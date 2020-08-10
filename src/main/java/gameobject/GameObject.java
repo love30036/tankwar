@@ -1,4 +1,5 @@
-import javax.swing.*;
+package gameobject;
+
 import java.awt.*;
 
 public abstract class GameObject {
@@ -11,7 +12,7 @@ public abstract class GameObject {
     protected int height;
     protected boolean alive;
 
-    public GameObject(int x, int y,Image[] image ) {
+    public GameObject(int x, int y, Image[] image ) {
         this.x = x;
         this.y = y;
         this.image = image;
