@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.List;
 
-public class Bullet extends Tank {
+public class Bullet extends MoveObject {
 
 
     public Bullet(int x, int y, Diretion diretion, Image[] image) {
@@ -23,7 +23,7 @@ public class Bullet extends Tank {
         move();
         collision();
 
-        g.drawImage(image[diretion.ordinal()],x,y,null);
+        g.drawImage(image[direction.ordinal()],x,y,null);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Bullet extends Tank {
             alive = false;
             return;
         }
-        List<GameObject> objects = Tankwar.gameClinet.getGameObject();
+       List<GameObject> objects = Tankwar.gameClinet.getGameObject();
 
         for(GameObject object:objects){
             if(object==this){
@@ -49,7 +49,7 @@ public class Bullet extends Tank {
                 if(object instanceof Tank){
                     alive = false;
                     object.alive=false;
-                    return;
+
                 }
 
 

@@ -1,29 +1,26 @@
 import java.awt.*;
 
-public abstract class MoveObject extends GameObject{
+/***
+ * 坦克物件
+ */
 
-    Diretion diretion;
+public abstract class MoveObject extends GameObject {
+
     protected int speed;
+    protected Diretion direction;
     protected boolean enemy;
 
-
-    public MoveObject(int x, int y, Diretion diretion, Image[] image) {
-        this(x,y,diretion,false,image);
+    public MoveObject(int x, int y, Diretion direction, Image[] image) {
+        this(x, y, direction, false, image);
     }
-    public MoveObject(int x, int y, Diretion diretion, boolean enemy, Image[] image) {
+
+    public MoveObject(int x, int y, Diretion direction, boolean enemy, Image[] image) {
         super(x, y, image);
-        this.diretion = diretion;
-        this.speed = 5;
-        this.enemy=enemy;
-    }
-
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int sleep) {
-        this.speed = sleep;
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
+        this.enemy = enemy;
+        speed = 10;
     }
 
     public int getX() {
@@ -42,90 +39,94 @@ public abstract class MoveObject extends GameObject{
         this.y = y;
     }
 
-    public Diretion getDiretion() {
-        return diretion;
+    public Diretion getDirection() {
+        return direction;
     }
 
-    public void setDiretion(Diretion diretion) {
-        this.diretion = diretion;
+    public void setDirection(Diretion direction) {
+        this.direction = direction;
     }
 
-    public void move(){
-        oldX=x;
-        oldY=y;
-        switch (diretion){
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void move() {
+
+        oldX = x;
+        oldY = y;
+
+        switch (direction) {
             case UP:
-                y-=speed;
+                y -= speed;
                 break;
             case DOWN:
-                y+=speed;
+                y += speed;
                 break;
             case LEFT:
-                x-=speed;
+                x -= speed;
                 break;
             case RIGHT:
-                x+=speed;
+                x += speed;
                 break;
             case UP_LEFT:
-                y-=speed;
-                x-=speed;
+                y -= speed;
+                x -= speed;
                 break;
             case UP_RIGFT:
-                y-=speed;
-                x+=speed;
+                y -= speed;
+                x += speed;
                 break;
             case DOWN_LEFT:
-                y+=speed;
-                x-=speed;
+                x -= speed;
+                y += speed;
                 break;
             case DOWN_RIGHT:
-                y+=speed;
-                x+=speed;
+                x += speed;
+                y += speed;
                 break;
         }
-
-
     }
+
+
     public boolean collisionBound() {
+
         boolean collision = false;
-        if(x<0){
+        if (x < 0) {
             x = 0;
             collision = true;
         } else if (x > Tankwar.gameClinet.getWidth() - width) {
             x = Tankwar.gameClinet.getWidth() - width;
             collision = true;
         }
-        if(y<0){
+
+        if (y < 0) {
             y = 0;
             collision = true;
         } else if (y > Tankwar.gameClinet.getHeight() - height) {
             y = Tankwar.gameClinet.getHeight() - height;
             collision = true;
         }
+
         return collision;
     }
-    public void collision(){
 
-        collisionBound();
-
-        for(GameObject object:Tankwar.gameClinet.getGameObject()){
-            if(object!=this){
-                if (object.getRectangle().intersects(this.getRectangle())){
-                    x=oldX;
-                    y=oldY;
-                    return;
-                }
-            }
+    public abstract void collision();
 
 
+    public void draw(Graphics g) {
+        if (!alive) {
+            return;
         }
 
+        move();
+        collision();
 
 
+        g.drawImage(image[direction.ordinal()], x, y, null);
     }
-
-    abstract void draw(Graphics g);
-
-    }
-
-
+}

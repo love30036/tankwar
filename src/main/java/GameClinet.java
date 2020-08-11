@@ -77,9 +77,10 @@ public class GameClinet extends JComponent {
             object.draw(g);
         }
 
-        Iterator<GameObject> iterator = gameObjects.iterator();
-        while (iterator.hasNext()){
-            if(!(iterator.next()).isAlive()){
+        Iterator<GameObject> iterator=gameObjects.iterator();
+
+        while(iterator.hasNext()){
+            if (!iterator.next().alive) {
                 iterator.remove();
             }
         }
