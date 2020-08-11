@@ -124,19 +124,29 @@ public class Tank extends GameObject{
                 break;
         }
 
-    }
-    public void collision(){
 
+    }
+    public boolean collisionBound() {
+        boolean collision = false;
         if(x<0){
             x = 0;
+            collision = true;
         } else if (x > Tankwar.gameClinet.getWidth() - width) {
             x = Tankwar.gameClinet.getWidth() - width;
+            collision = true;
         }
         if(y<0){
             y = 0;
+            collision = true;
         } else if (y > Tankwar.gameClinet.getHeight() - height) {
             y = Tankwar.gameClinet.getHeight() - height;
+            collision = true;
         }
+        return collision;
+    }
+    public void collision(){
+
+        collisionBound();
 
         for(GameObject object:Tankwar.gameClinet.getGameObject()){
             if(object!=this){
@@ -151,7 +161,9 @@ public class Tank extends GameObject{
         }
 
 
+
     }
+
 
 
     private void determineDirection(){
@@ -166,7 +178,9 @@ public class Tank extends GameObject{
         else if (dirs[3] && !dirs[1]&& !dirs[0] &&!dirs[2]) diretion = Diretion.RIGHT;
     }
     public void draw(Graphics g){
-
+        if(!alive){
+            return;
+        }
         if (!isStop()) {
             determineDirection();
             move();
@@ -192,6 +206,11 @@ public class Tank extends GameObject{
     public void fire(){
         Tankwar.gameClinet.addGameObject(new Bullet(x+width/2 - GameClinet.bullentImage[0].getWidth(null)/2,
                 y+height/2 - GameClinet.bullentImage[0].getHeight(null)/2,diretion,enemy,GameClinet.bullentImage));
+    }
+    public void superFire(){
+        for(Diretion diretion:Diretion.values()){
+
+        }
     }
 
 }

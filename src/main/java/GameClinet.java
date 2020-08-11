@@ -45,6 +45,7 @@ public class GameClinet extends JComponent {
         for(int i = 0; i<iTankImage.length;i++){
             iTankImage[i]=Tools.getImage("iTank"+sub[i]);
             eTankImage[i]=Tools.getImage("eTank"+sub[i]);
+            bullentImage[i]=Tools.getImage("missile"+sub[i]);
         }
 
         playerTank = new Tank(getCenterPosX(47),100,Diretion.UP ,iTankImage);
@@ -67,7 +68,7 @@ public class GameClinet extends JComponent {
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.setColor(Color.BLACK);
+        g.setColor(Color.GRAY);
         g.fillRect(0,0,getWidth(),getHeight());
 //        g.drawImage(playerTank.getimage(),
 //                playerTank.getX(),playerTank.getY(),null);
@@ -75,6 +76,15 @@ public class GameClinet extends JComponent {
         for(GameObject object:gameObjects){
             object.draw(g);
         }
+
+        Iterator<GameObject> iterator = gameObjects.iterator();
+        while (iterator.hasNext()){
+            if(!(iterator.next()).isAlive()){
+                iterator.remove();
+            }
+        }
+        System.out.println(gameObjects.size());
+
 //        for(Tank tank:enemyTank){
 //            tank.draw(g);
 //        }
@@ -118,7 +128,9 @@ public class GameClinet extends JComponent {
                 break;
             case KeyEvent.VK_CONTROL:
                 playerTank.fire();
-
+                break;
+            case KeyEvent.VK_A:
+                playerTank.superFire();
                 break;
 
         }
