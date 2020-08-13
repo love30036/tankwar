@@ -10,6 +10,7 @@ public abstract class GameObject {
     protected int width;
     protected int height;
     protected boolean alive;
+    protected int frame;
 
     public GameObject(int x, int y,Image[] image ) {
         this.x = x;
@@ -23,7 +24,5 @@ public abstract class GameObject {
         return new Rectangle(x,y,width,height);
     }
     abstract void draw(Graphics g);
-    public boolean isAlive(){
-        return true;
-    }
+
 }

@@ -3,19 +3,20 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class GameClinet extends JComponent {
 
     private int screenwidth;
     private int screenhight;
-    private Tank playerTank;
+    private PlayTank playerTank;
 //    private List<Tank> enemyTank = new ArrayList<>();
 //    private List<Wall> walls = new ArrayList<>();
-    private List<GameObject> gameObjects =new ArrayList<>();
+    private CopyOnWriteArrayList<GameObject> gameObjects =new CopyOnWriteArrayList<>();
     private boolean stop;
     public static Image[] bullentImage = new Image[8];
-
+    public static Image[] explosinsImage =new Image[11];
 
     public GameClinet(int screenwidth, int screenhight) {
         this.screenwidth = screenwidth;
@@ -47,11 +48,14 @@ public class GameClinet extends JComponent {
             eTankImage[i]=Tools.getImage("eTank"+sub[i]);
             bullentImage[i]=Tools.getImage("missile"+sub[i]);
         }
+        for(int i =0;i<explosinsImage.length;i++){
+            explosinsImage[i]=Tools.getImage(i+".png");
+        }
 
-        playerTank = new Tank(getCenterPosX(47),100,Diretion.UP ,iTankImage);
+        playerTank = new PlayTank(getCenterPosX(47),100,Diretion.UP ,iTankImage);
         for(int i =0; i<3 ;i++){
             for (int j = 0; j<4 ;j++){
-                gameObjects.add(new Tank(300+j*80,500+i*80,Diretion.UP,true,eTankImage));
+                gameObjects.add(new EnenyTank(300+j*80,500+i*80,Diretion.UP,true,eTankImage));
             }
         Image image = Tools.getImage("brick.png");
         gameObjects.add(new Wall(250,150,15,true,brickImage));
@@ -76,14 +80,20 @@ public class GameClinet extends JComponent {
         for(GameObject object:gameObjects){
             object.draw(g);
         }
+        for(GameObject object:gameObjects){
+            if(!object.alive){
+                gameObjects.remove(object);
 
-        Iterator<GameObject> iterator=gameObjects.iterator();
-
-        while(iterator.hasNext()){
-            if (!iterator.next().alive) {
-                iterator.remove();
             }
         }
+
+//        Iterator<GameObject> iterator=gameObjects.iterator();
+//
+//        while(iterator.hasNext()){
+//            if (!iterator.next().alive) {
+//                iterator.remove();
+//            }
+//        }
         System.out.println(gameObjects.size());
 
 //        for(Tank tank:enemyTank){
@@ -166,6 +176,10 @@ public class GameClinet extends JComponent {
         this(800,600);
     }
 
+    public void checkGameStatus(){
+        boolean gameWin = true;
 
+
+    }
 
 }

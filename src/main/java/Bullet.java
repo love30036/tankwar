@@ -27,15 +27,17 @@ public class Bullet extends MoveObject {
     }
 
     @Override
-    public void collision() {
+    public boolean collision() {
         if(collisionBound()){
             alive = false;
-            return;
+            return true;
         }
        List<GameObject> objects = Tankwar.gameClinet.getGameObject();
 
         for(GameObject object:objects){
-            if(object==this){
+
+
+            if(object instanceof Bullet|| object instanceof  Explosion){
                 continue;
             }
             if(object instanceof Tank){
@@ -45,18 +47,15 @@ public class Bullet extends MoveObject {
             }
             if(getRectangle().intersects(object.getRectangle())){
                 alive = false;
-
                 if(object instanceof Tank){
-                    alive = false;
+
                     object.alive=false;
 
                 }
-
-
-               return;
+                Tankwar.gameClinet.addGameObject(new Explosion(x,y,GameClinet.explosinsImage));
             }
         }
-
+        return true;
     }
 
 
